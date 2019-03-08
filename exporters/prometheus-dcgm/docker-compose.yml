@@ -10,8 +10,10 @@ services:
 
     node_exporter:
         image: prom/node-exporter
-        command: --collector.textfile.directory=/run/prometheus
+        command: --collector.textfile.directory=/run/prometheus --web.telemetry-path="/debug/metrics"
         pid: "host"
+        ports:
+            - 9101:9100
         volumes:
             - prometheus_data:/prometheus
             - prometheus_textfiles:/run/prometheus:ro
